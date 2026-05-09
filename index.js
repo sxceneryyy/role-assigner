@@ -13,7 +13,7 @@ const client = new Client({
 
 const GUEST_ROLE_NAME = 'guest';
 const LOCAL_ROLE_NAME = 'local';
-const VERIFY_MESSAGE_ID = '1502781898823565422';
+const VERIFY_MESSAGE_ID = '1502787676867137536';
 
 client.once('ready', () => {
   console.log(`✅ Logged in as ${client.user.tag}`);
