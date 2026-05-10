@@ -62,8 +62,9 @@ client.on('guildMemberAdd', async (member) => {
     const embed = new EmbedBuilder()
       .setColor(0xC7B8B7)
       .setDescription(
-        `♡⸝⸝ welc <@${member.id}> ㅤㅤㅤㅤㅤㅤ ・・・・・ㅤㅤㅤㅤ<t:${Math.floor(Date.now() / 1000)}:R>`
-      )
+  `♡⸝⸝ welc <@${member.id}> ㅤㅤㅤㅤㅤㅤ\n` +
+  `ㅤㅤㅤㅤㅤㅤ ・・・・・ㅤㅤㅤ<#${member.guild.channels.cache.find(c => c.name === 'verify')?.id}>`
+)
     await welcChannel.send({ embeds: [embed] });
   }
 });
