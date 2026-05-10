@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { Client, GatewayIntentBits, Partials } = require('discord.js');
+const { Client, GatewayIntentBits, Partials, EmbedBuilder } = require('discord.js');
 
 const client = new Client({
   intents: [
@@ -14,6 +14,7 @@ const client = new Client({
 const GUEST_ROLE_NAME = 'guest';
 const LOCAL_ROLE_NAME = 'local';
 const VERIFY_MESSAGE_ID = '1502787676867137536';
+const WELC_CHANNEL_NAME = 'welc';
 
 const AGE_MESSAGE_ID = '1502807865335877775';
 const MIC_MESSAGE_ID = '1502807873359712378';
@@ -42,16 +43,28 @@ client.once('ready', () => {
 });
 
 client.on('guildMemberAdd', async (member) => {
+  // assign guest role
   const role = member.guild.roles.cache.find(r => r.name === GUEST_ROLE_NAME);
   if (!role) {
     console.log('❌ Guest role not found! Make sure it is spelled correctly in your server.');
-    return;
+  } else {
+    try {
+      await member.roles.add(role);
+      console.log(`✅ Assigned guest role to ${member.user.tag}`);
+    } catch (error) {
+      console.log(`❌ Couldn't assign role: ${error}`);
+    }
   }
-  try {
-    await member.roles.add(role);
-    console.log(`✅ Assigned guest role to ${member.user.tag}`);
-  } catch (error) {
-    console.log(`❌ Couldn't assign role: ${error}`);
+
+  // welcome embed
+  const welcChannel = member.guild.channels.cache.find(c => c.name === WELC_CHANNEL_NAME);
+  if (welcChannel) {
+    const embed = new EmbedBuilder()
+      .setColor(0xC7B8B7)
+      .setDescription(
+        `♡⸝⸝ welc <@${member.id}> ㅤㅤㅤㅤㅤㅤ ・・・・・ㅤㅤㅤㅤ<t:${Math.floor(Date.now() / 1000)}:R>`
+      )
+    await welcChannel.send({ embeds: [embed] });
   }
 });
 
