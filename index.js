@@ -36,6 +36,8 @@ const PING_ROLES = {
   two: '1502796804616618075',
   three: '1502797058745172028',
   four: '1502797257173631006',
+  five: '1503535577364955257',
+  six: '1503535715437248572',
 };
 
 client.once('ready', () => {
@@ -62,9 +64,9 @@ client.on('guildMemberAdd', async (member) => {
     const embed = new EmbedBuilder()
       .setColor(0xC7B8B7)
       .setDescription(
-  `♡⸝⸝ welc <@${member.id}> ㅤㅤㅤㅤㅤㅤ\n` +
-  `ㅤㅤㅤㅤㅤㅤ ・・・・・ㅤㅤㅤ<#${member.guild.channels.cache.find(c => c.name === 'verify')?.id}>`
-)
+        `♡⸝⸝ welc <@${member.id}> ㅤㅤㅤㅤㅤㅤ\n` +
+        `ㅤㅤㅤㅤㅤㅤ ・・・・・ㅤㅤㅤ<#${member.guild.channels.cache.find(c => c.name === 'verify')?.id}>`
+      )
     await welcChannel.send({ embeds: [embed] });
   }
 });
